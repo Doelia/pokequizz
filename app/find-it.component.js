@@ -16,14 +16,27 @@ var FindItComponent = (function () {
         this.dico = dico;
     }
     FindItComponent.prototype.ngOnInit = function () {
-        this.name = this.dico.getName(this.id);
+    };
+    FindItComponent.prototype.cleanName = function (str) {
+        return str.replace(/[áàãâä]/gi, "a")
+            .replace(/[éè¨ê]/gi, "e")
+            .replace(/[íìïî]/gi, "i")
+            .replace(/[óòöôõ]/gi, "o")
+            .replace(/[úùüû]/gi, "u")
+            .replace(/[ç]/gi, "c")
+            .replace(/[ñ]/gi, "n")
+            .replace(/[^a-zA-Z0-9]/g, " ")
+            .toUpperCase();
     };
     FindItComponent.prototype.check = function () {
-        if (this.user_input == this.name) {
+        var name = this.dico.getName(this.id);
+        name = this.cleanName(name);
+        var in_cleaned = this.cleanName(this.user_input);
+        if (in_cleaned == name) {
             console.log('OK!');
         }
         else {
-            console.log('Nop.');
+            console.log('Nop.', name);
         }
     };
     __decorate([

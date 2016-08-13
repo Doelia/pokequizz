@@ -14,21 +14,34 @@ import {PokemonDicoService } from './pokemon-dico.service';
 })
 export class FindItComponent implements OnInit {
     user_input;
-    name;
     @Input() id;
 
     constructor(private dico: PokemonDicoService) {
     }
 
     ngOnInit() {
-        this.name = this.dico.getName(this.id);
+    }
+
+    private cleanName(str) {
+        return  str.replace(/[áàãâä]/gi,"a")
+         .replace(/[éè¨ê]/gi,"e")
+         .replace(/[íìïî]/gi,"i")
+         .replace(/[óòöôõ]/gi,"o")
+         .replace(/[úùüû]/gi, "u")
+         .replace(/[ç]/gi, "c")
+         .replace(/[ñ]/gi, "n")
+         .replace(/[^a-zA-Z0-9]/g," ")
+         .toUpperCase();
     }
 
     check() {
-        if (this.user_input == this.name) {
+        let name = this.dico.getName(this.id);
+        name = this.cleanName(name);
+        let in_cleaned = this.cleanName(this.user_input);
+        if (in_cleaned == name) {
             console.log('OK!');
         } else {
-            console.log('Nop.');
+            console.log('Nop.', name);
         }
     }
 
