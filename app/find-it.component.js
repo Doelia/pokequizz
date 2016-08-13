@@ -18,6 +18,7 @@ var FindItComponent = (function () {
         this.onGood = new core_1.EventEmitter();
     }
     FindItComponent.prototype.ngOnInit = function () {
+        document.getElementById("user_input").focus();
     };
     FindItComponent.prototype.cleanName = function (str) {
         return str.replace(/[áàãâä]/gi, "a")
@@ -54,7 +55,7 @@ var FindItComponent = (function () {
         core_1.Component({
             selector: 'find-it',
             directives: [pokemon_component_1.PokemonComponent],
-            template: "\n    <pokemon [id]=\"id\"></pokemon>\n    <input type=\"text\" name=\"user_input\" [(ngModel)]=\"user_input\" (ngModelChange)=\"check()\" />\n    <button (click)=\"check()\">Check</button>\n    {{user_input}}\n    "
+            template: "\n    <pokemon [id]=\"id\"></pokemon>\n    <input id=\"user_input\" type=\"text\" name=\"user_input\" [(ngModel)]=\"user_input\" (ngModelChange)=\"check()\" />\n    <button (click)=\"check()\">Check</button>\n    {{user_input}}\n    "
         }), 
         __metadata('design:paramtypes', [pokemon_dico_service_1.PokemonDicoService])
     ], FindItComponent);
