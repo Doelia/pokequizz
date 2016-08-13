@@ -7,7 +7,7 @@ import {PokemonDicoService } from './pokemon-dico.service';
     directives: [PokemonComponent],
     template: `
     <pokemon [id]="id"></pokemon>
-    <input type="text" name="user_input" [(ngModel)]="user_input" />
+    <input type="text" name="user_input" [(ngModel)]="user_input" (ngModelChange)="check()" />
     <button (click)="check()">Check</button>
     {{user_input}}
     `
