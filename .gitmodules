@@ -1,0 +1,3 @@
+[submodule "assets/PoGO-Awesome"]
+	path = assets/PoGO-Awesome
+	url = git://github.com/DavydeVries/PoGO-Awesome
