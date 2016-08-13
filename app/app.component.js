@@ -10,33 +10,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var pokemon_dico_service_1 = require('./pokemon-dico.service');
-var find_it_component_1 = require('./find-it.component');
+var game_component_1 = require('./game.component');
 var AppComponent = (function () {
     function AppComponent(dico) {
         var _this = this;
         this.dico = dico;
         this.isLoad = false;
-        this.id = 1;
         this.dico.isLoad(function () { return _this.isLoad = true; });
     }
-    AppComponent.prototype.onGood = function () {
-        this.next();
-    };
-    AppComponent.prototype.next = function () {
-        var _this = this;
-        this.id = null;
-        setTimeout(function () { return _this.id = _this.random(); }, 50);
-    };
-    AppComponent.prototype.random = function () {
-        var max = this.dico.getMaxNumber();
-        return Math.floor((Math.random() * max) + 1);
-    };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'pokequizz',
-            template: "\n  <div *ngIf=\"isLoad\">\n  <h1>Pokequizz</h1>\n  <find-it *ngIf=\"id\" [id]=\"id\" (onGood)=\"onGood()\"></find-it>\n  <button (click)=\"next()\">Next</button>\n  </div>\n  ",
+            template: "\n  <div *ngIf=\"isLoad\">\n  <h1>Pokequizz</h1>\n  <game></game>\n  </div>\n  ",
             providers: [pokemon_dico_service_1.PokemonDicoService],
-            directives: [find_it_component_1.FindItComponent]
+            directives: [game_component_1.GameComponent]
         }), 
         __metadata('design:paramtypes', [pokemon_dico_service_1.PokemonDicoService])
     ], AppComponent);

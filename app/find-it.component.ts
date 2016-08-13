@@ -7,8 +7,7 @@ import {PokemonDicoService } from './pokemon-dico.service';
     directives: [PokemonComponent],
     template: `
     <pokemon [id]="id"></pokemon>
-    <input id="user_input" type="text" name="user_input" [(ngModel)]="user_input" (ngModelChange)="check()" />
-    {{user_input}}
+    <input class="form-control" id="user_input" type="text" name="user_input" [(ngModel)]="user_input" (ngModelChange)="check()" />
     `
 })
 export class FindItComponent implements OnInit {
