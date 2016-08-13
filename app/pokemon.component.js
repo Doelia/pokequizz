@@ -9,23 +9,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var pokemon_dico_service_1 = require('./pokemon-dico.service');
-var pokemon_component_1 = require('./pokemon.component');
-var AppComponent = (function () {
-    function AppComponent(dico) {
-        this.dico = dico;
-        console.log('Hello');
+var PokemonComponent = (function () {
+    function PokemonComponent() {
     }
-    AppComponent = __decorate([
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], PokemonComponent.prototype, "id", void 0);
+    PokemonComponent = __decorate([
         core_1.Component({
-            selector: 'pokequizz',
-            template: "\n  <h1>My First Angular 2 App</h1>\n  <pokemon id=\"1\"></pokemon>\n  ",
-            providers: [pokemon_dico_service_1.PokemonDicoService],
-            directives: [pokemon_component_1.PokemonComponent]
+            selector: 'pokemon',
+            template: "\n     <div class=\"pogo pokemon-{{id}} pogo\"></div>\n    "
         }), 
-        __metadata('design:paramtypes', [pokemon_dico_service_1.PokemonDicoService])
-    ], AppComponent);
-    return AppComponent;
+        __metadata('design:paramtypes', [])
+    ], PokemonComponent);
+    return PokemonComponent;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.PokemonComponent = PokemonComponent;
+//# sourceMappingURL=pokemon.component.js.map
