@@ -10,18 +10,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var pokemon_dico_service_1 = require('./pokemon-dico.service');
-var pokemon_component_1 = require('./pokemon.component');
+var find_it_component_1 = require('./find-it.component');
 var AppComponent = (function () {
     function AppComponent(dico) {
+        var _this = this;
         this.dico = dico;
+        this.isLoad = false;
+        this.id = 1;
         console.log('Hello');
+        this.dico.isLoad(function () { return _this.isLoad = true; });
     }
+    AppComponent.prototype.next = function () {
+        this.id++;
+    };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'pokequizz',
-            template: "\n  <h1>My First Angular 2 App</h1>\n  <pokemon id=\"1\"></pokemon>\n  ",
+            template: "\n  <div *ngIf=\"isLoad\">\n  <h1>My First Angular 2 App</h1>\n  <find-it [id]=\"id\"></find-it>\n  <button (click)=\"next()\">Next</button>\n  </div>\n  ",
             providers: [pokemon_dico_service_1.PokemonDicoService],
-            directives: [pokemon_component_1.PokemonComponent]
+            directives: [find_it_component_1.FindItComponent]
         }), 
         __metadata('design:paramtypes', [pokemon_dico_service_1.PokemonDicoService])
     ], AppComponent);

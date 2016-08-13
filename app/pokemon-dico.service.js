@@ -12,18 +12,29 @@ var http_1 = require('@angular/http');
 var core_1 = require('@angular/core');
 var PokemonDicoService = (function () {
     function PokemonDicoService(_http) {
+        var _this = this;
         this._http = _http;
         console.log('Construct PokemonDicoService');
         this.loadDico();
+        this.isLoadPromise = new Promise(function (resolve, reject) {
+            return _this.resolver = resolve;
+        });
     }
+    PokemonDicoService.prototype.isLoad = function (callback) {
+        return this.isLoadPromise.then(callback);
+    };
     PokemonDicoService.prototype.getDico = function () {
         return this.dico;
     };
+    PokemonDicoService.prototype.getName = function (id) {
+        return this.dico[id];
+    };
     PokemonDicoService.prototype.loadDico = function () {
         var _this = this;
-        return this._http.get("./pokemon-dico.json")
+        return this._http.get("./assets/pokemon-dico.json")
             .subscribe(function (v) {
             _this.dico = v.json();
+            _this.resolver();
             console.log('dico: ', _this.dico);
         });
     };
