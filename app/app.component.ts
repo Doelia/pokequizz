@@ -20,7 +20,6 @@ export class AppComponent {
     id: number = 1;
 
     constructor(private dico: PokemonDicoService) {
-        console.log('Hello');
         this.dico.isLoad(() => this.isLoad = true);
     }
 
@@ -35,7 +34,6 @@ export class AppComponent {
 
     random() {
         let max = this.dico.getMaxNumber();
-        console.log('max', max);
         return Math.floor((Math.random() * max) + 1);
     }
 }

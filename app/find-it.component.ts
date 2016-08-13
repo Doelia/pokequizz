@@ -8,7 +8,6 @@ import {PokemonDicoService } from './pokemon-dico.service';
     template: `
     <pokemon [id]="id"></pokemon>
     <input id="user_input" type="text" name="user_input" [(ngModel)]="user_input" (ngModelChange)="check()" />
-    <button (click)="check()">Check</button>
     {{user_input}}
     `
 })
@@ -43,7 +42,6 @@ export class FindItComponent implements OnInit {
         let in_cleaned = this.cleanName(this.user_input);
 
         if (in_cleaned == name) {
-            console.log('OK!');
             this.onGood.emit(null);
         } else {
             console.log('Nop.', name);

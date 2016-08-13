@@ -36,7 +36,6 @@ var FindItComponent = (function () {
         name = this.cleanName(name);
         var in_cleaned = this.cleanName(this.user_input);
         if (in_cleaned == name) {
-            console.log('OK!');
             this.onGood.emit(null);
         }
         else {
@@ -55,7 +54,7 @@ var FindItComponent = (function () {
         core_1.Component({
             selector: 'find-it',
             directives: [pokemon_component_1.PokemonComponent],
-            template: "\n    <pokemon [id]=\"id\"></pokemon>\n    <input id=\"user_input\" type=\"text\" name=\"user_input\" [(ngModel)]=\"user_input\" (ngModelChange)=\"check()\" />\n    <button (click)=\"check()\">Check</button>\n    {{user_input}}\n    "
+            template: "\n    <pokemon [id]=\"id\"></pokemon>\n    <input id=\"user_input\" type=\"text\" name=\"user_input\" [(ngModel)]=\"user_input\" (ngModelChange)=\"check()\" />\n    {{user_input}}\n    "
         }), 
         __metadata('design:paramtypes', [pokemon_dico_service_1.PokemonDicoService])
     ], FindItComponent);

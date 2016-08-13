@@ -39,7 +39,7 @@ export class PokemonDicoService {
             .subscribe(v => {
                 this.dico = v.json();
                 this.resolver();
-                console.log('dico: ', this.dico);
+                // console.log('dico: ', this.dico);
             });
     }
 }

@@ -17,7 +17,6 @@ var AppComponent = (function () {
         this.dico = dico;
         this.isLoad = false;
         this.id = 1;
-        console.log('Hello');
         this.dico.isLoad(function () { return _this.isLoad = true; });
     }
     AppComponent.prototype.onGood = function () {
@@ -30,7 +29,6 @@ var AppComponent = (function () {
     };
     AppComponent.prototype.random = function () {
         var max = this.dico.getMaxNumber();
-        console.log('max', max);
         return Math.floor((Math.random() * max) + 1);
     };
     AppComponent = __decorate([

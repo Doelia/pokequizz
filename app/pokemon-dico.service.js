@@ -39,7 +39,7 @@ var PokemonDicoService = (function () {
             .subscribe(function (v) {
             _this.dico = v.json();
             _this.resolver();
-            console.log('dico: ', _this.dico);
+            // console.log('dico: ', this.dico);
         });
     };
     PokemonDicoService = __decorate([
