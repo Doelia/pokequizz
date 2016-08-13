@@ -7,7 +7,7 @@ import { FindItComponent } from './find-it.component';
   template: `
   <div *ngIf="isLoad">
   <h1>Pokequizz</h1>
-  <find-it [id]="id"></find-it>
+  <find-it *ngIf="id" [id]="id" (onGood)="onGood()"></find-it>
   <button (click)="next()">Next</button>
   </div>
   `,
@@ -24,9 +24,13 @@ export class AppComponent {
         this.dico.isLoad(() => this.isLoad = true);
     }
 
-    next() {
-        this.id = this.random();
+    onGood() {
+        this.next();
+    }
 
+    next() {
+        this.id = null;
+        setTimeout(() => this.id = this.random(), 50);
     }
 
     random() {

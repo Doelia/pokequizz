@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, Output, OnInit, EventEmitter} from '@angular/core';
 import { PokemonComponent} from './pokemon.component';
 import {PokemonDicoService } from './pokemon-dico.service';
 
@@ -15,6 +15,7 @@ import {PokemonDicoService } from './pokemon-dico.service';
 export class FindItComponent implements OnInit {
     user_input = "";
     @Input() id;
+    @Output() onGood: EventEmitter<any> = new EventEmitter();
 
     constructor(private dico: PokemonDicoService) {
     }
@@ -42,6 +43,7 @@ export class FindItComponent implements OnInit {
 
         if (in_cleaned == name) {
             console.log('OK!');
+            this.onGood.emit(null);
         } else {
             console.log('Nop.', name);
         }

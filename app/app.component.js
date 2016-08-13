@@ -20,8 +20,13 @@ var AppComponent = (function () {
         console.log('Hello');
         this.dico.isLoad(function () { return _this.isLoad = true; });
     }
+    AppComponent.prototype.onGood = function () {
+        this.next();
+    };
     AppComponent.prototype.next = function () {
-        this.id = this.random();
+        var _this = this;
+        this.id = null;
+        setTimeout(function () { return _this.id = _this.random(); }, 50);
     };
     AppComponent.prototype.random = function () {
         var max = this.dico.getMaxNumber();
@@ -31,7 +36,7 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: 'pokequizz',
-            template: "\n  <div *ngIf=\"isLoad\">\n  <h1>Pokequizz</h1>\n  <find-it [id]=\"id\"></find-it>\n  <button (click)=\"next()\">Next</button>\n  </div>\n  ",
+            template: "\n  <div *ngIf=\"isLoad\">\n  <h1>Pokequizz</h1>\n  <find-it *ngIf=\"id\" [id]=\"id\" (onGood)=\"onGood()\"></find-it>\n  <button (click)=\"next()\">Next</button>\n  </div>\n  ",
             providers: [pokemon_dico_service_1.PokemonDicoService],
             directives: [find_it_component_1.FindItComponent]
         }), 

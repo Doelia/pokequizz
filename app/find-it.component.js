@@ -15,6 +15,7 @@ var FindItComponent = (function () {
     function FindItComponent(dico) {
         this.dico = dico;
         this.user_input = "";
+        this.onGood = new core_1.EventEmitter();
     }
     FindItComponent.prototype.ngOnInit = function () {
     };
@@ -35,6 +36,7 @@ var FindItComponent = (function () {
         var in_cleaned = this.cleanName(this.user_input);
         if (in_cleaned == name) {
             console.log('OK!');
+            this.onGood.emit(null);
         }
         else {
             console.log('Nop.', name);
@@ -44,6 +46,10 @@ var FindItComponent = (function () {
         core_1.Input(), 
         __metadata('design:type', Object)
     ], FindItComponent.prototype, "id", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', core_1.EventEmitter)
+    ], FindItComponent.prototype, "onGood", void 0);
     FindItComponent = __decorate([
         core_1.Component({
             selector: 'find-it',
