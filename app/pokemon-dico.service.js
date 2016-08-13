@@ -23,7 +23,7 @@ var PokemonDicoService = (function () {
         var _this = this;
         return this._http.get("./pokemon-dico.json")
             .subscribe(function (v) {
-            _this.dico = v;
+            _this.dico = v.json();
             console.log('dico: ', _this.dico);
         });
     };

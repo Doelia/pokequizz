@@ -19,7 +19,7 @@ export class PokemonDicoService {
     loadDico() {
         return this._http.get("./pokemon-dico.json")
             .subscribe(v => {
-                this.dico = v;
+                this.dico = v.json();
                 console.log('dico: ', this.dico);
             });
     }
