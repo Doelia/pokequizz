@@ -13,7 +13,7 @@ import {PokemonDicoService } from './pokemon-dico.service';
     `
 })
 export class FindItComponent implements OnInit {
-    user_input;
+    user_input = "";
     @Input() id;
 
     constructor(private dico: PokemonDicoService) {
@@ -37,7 +37,9 @@ export class FindItComponent implements OnInit {
     check() {
         let name = this.dico.getName(this.id);
         name = this.cleanName(name);
+
         let in_cleaned = this.cleanName(this.user_input);
+
         if (in_cleaned == name) {
             console.log('OK!');
         } else {

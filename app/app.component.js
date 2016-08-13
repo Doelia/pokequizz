@@ -21,12 +21,17 @@ var AppComponent = (function () {
         this.dico.isLoad(function () { return _this.isLoad = true; });
     }
     AppComponent.prototype.next = function () {
-        this.id++;
+        this.id = this.random();
+    };
+    AppComponent.prototype.random = function () {
+        var max = this.dico.getMaxNumber();
+        console.log('max', max);
+        return Math.floor((Math.random() * max) + 1);
     };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'pokequizz',
-            template: "\n  <div *ngIf=\"isLoad\">\n  <h1>My First Angular 2 App</h1>\n  <find-it [id]=\"id\"></find-it>\n  <button (click)=\"next()\">Next</button>\n  </div>\n  ",
+            template: "\n  <div *ngIf=\"isLoad\">\n  <h1>Pokequizz</h1>\n  <find-it [id]=\"id\"></find-it>\n  <button (click)=\"next()\">Next</button>\n  </div>\n  ",
             providers: [pokemon_dico_service_1.PokemonDicoService],
             directives: [find_it_component_1.FindItComponent]
         }), 

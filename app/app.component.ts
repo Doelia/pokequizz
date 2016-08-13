@@ -6,7 +6,7 @@ import { FindItComponent } from './find-it.component';
   selector: 'pokequizz',
   template: `
   <div *ngIf="isLoad">
-  <h1>My First Angular 2 App</h1>
+  <h1>Pokequizz</h1>
   <find-it [id]="id"></find-it>
   <button (click)="next()">Next</button>
   </div>
@@ -25,6 +25,13 @@ export class AppComponent {
     }
 
     next() {
-        this.id++;
+        this.id = this.random();
+
+    }
+
+    random() {
+        let max = this.dico.getMaxNumber();
+        console.log('max', max);
+        return Math.floor((Math.random() * max) + 1);
     }
 }

@@ -29,6 +29,11 @@ export class PokemonDicoService {
         return this.dico[id];
     }
 
+    getMaxNumber() {
+        return 151;
+        // return Object.keys(this.dico).length;
+    }
+
     loadDico() {
         return this._http.get("./assets/pokemon-dico.json")
             .subscribe(v => {

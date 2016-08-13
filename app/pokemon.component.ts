@@ -4,7 +4,7 @@ import { Input, Component } from '@angular/core';
     selector: 'pokemon',
     template: `
      <div class="number">#{{id}}</div>
-     <div class="pogo pokemon-{{id}} pogo"></div>
+     <div class="pogo pokemon-{{id}} pogo-l"></div>
     `
 })
 export class PokemonComponent {

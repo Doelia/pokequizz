@@ -14,6 +14,7 @@ var pokemon_dico_service_1 = require('./pokemon-dico.service');
 var FindItComponent = (function () {
     function FindItComponent(dico) {
         this.dico = dico;
+        this.user_input = "";
     }
     FindItComponent.prototype.ngOnInit = function () {
     };

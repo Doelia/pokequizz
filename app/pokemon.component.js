@@ -19,7 +19,7 @@ var PokemonComponent = (function () {
     PokemonComponent = __decorate([
         core_1.Component({
             selector: 'pokemon',
-            template: "\n     <div class=\"number\">#{{id}}</div>\n     <div class=\"pogo pokemon-{{id}} pogo\"></div>\n    "
+            template: "\n     <div class=\"number\">#{{id}}</div>\n     <div class=\"pogo pokemon-{{id}} pogo-l\"></div>\n    "
         }), 
         __metadata('design:paramtypes', [])
     ], PokemonComponent);
