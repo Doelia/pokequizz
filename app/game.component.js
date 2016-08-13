@@ -18,6 +18,7 @@ var GameComponent = (function () {
         this.addToDone = new core_1.EventEmitter();
         this.addToFailed = new core_1.EventEmitter();
         this.id = 1;
+        this.next();
     }
     GameComponent.prototype.onGood = function () {
         this.addToDone.emit(this.id);
@@ -33,7 +34,7 @@ var GameComponent = (function () {
         setTimeout(function () { return _this.id = _this.random(); }, 50);
     };
     GameComponent.prototype.random = function () {
-        var max = this.dico.getMaxNumber();
+        var max = 151;
         return Math.floor((Math.random() * max) + 1);
     };
     GameComponent = __decorate([

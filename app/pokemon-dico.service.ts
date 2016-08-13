@@ -30,8 +30,7 @@ export class PokemonDicoService {
     }
 
     getMaxNumber() {
-        return 151;
-        // return Object.keys(this.dico).length;
+        return Object.keys(this.dico).length;
     }
 
     loadDico() {

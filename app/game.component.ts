@@ -30,6 +30,7 @@ export class GameComponent {
     id: number = 1;
 
     constructor(private dico: PokemonDicoService) {
+        this.next();
     }
 
     onGood() {
@@ -48,7 +49,7 @@ export class GameComponent {
     }
 
     random() {
-        let max = this.dico.getMaxNumber();
+        let max = 151;
         return Math.floor((Math.random() * max) + 1);
     }
 }

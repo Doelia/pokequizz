@@ -42,8 +42,6 @@ export class FindItComponent implements OnInit {
 
         if (in_cleaned == name) {
             this.onGood.emit(null);
-        } else {
-            console.log('Nop.', name);
         }
     }
 

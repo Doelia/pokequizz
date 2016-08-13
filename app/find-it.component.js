@@ -38,9 +38,6 @@ var FindItComponent = (function () {
         if (in_cleaned == name) {
             this.onGood.emit(null);
         }
-        else {
-            console.log('Nop.', name);
-        }
     };
     __decorate([
         core_1.Input(), 

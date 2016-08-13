@@ -30,8 +30,7 @@ var PokemonDicoService = (function () {
         return this.dico[id];
     };
     PokemonDicoService.prototype.getMaxNumber = function () {
-        return 151;
-        // return Object.keys(this.dico).length;
+        return Object.keys(this.dico).length;
     };
     PokemonDicoService.prototype.loadDico = function () {
         var _this = this;
