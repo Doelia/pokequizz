@@ -14,7 +14,7 @@ var find_it_component_1 = require('./find-it.component');
 var GameComponent = (function () {
     function GameComponent(dico) {
         this.dico = dico;
-        this.id = 1;
+        this.current_id = 1;
         this.last = null;
         this.nGood = 0;
         this.nPassed = -1;
@@ -28,17 +28,17 @@ var GameComponent = (function () {
     GameComponent.prototype.onGood = function () {
         this.nGood++;
         this.last = {
-            id: this.id,
+            id: this.current_id,
             isFound: true,
-            name: this.dico.getName(this.id)
+            name: this.dico.getName(this.current_id)
         };
         this.next();
     };
     GameComponent.prototype.skip = function () {
         this.last = {
-            id: this.id,
+            id: this.current_id,
             isFound: false,
-            name: this.dico.getName(this.id)
+            name: this.dico.getName(this.current_id)
         };
         this.next();
     };
@@ -49,9 +49,9 @@ var GameComponent = (function () {
             this.randomList();
             this.curentIRandom = 0;
         }
-        this.id = null;
+        this.current_id = null;
         var new_id = this.list_random[this.curentIRandom++];
-        setTimeout(function () { return _this.id = new_id; }, 50);
+        setTimeout(function () { return _this.current_id = new_id; }, 50);
         this.list_nexts = [];
         for (var i = 0; i < 10; i++) {
             this.list_nexts.push(this.list_random[this.curentIRandom + i]);
@@ -59,7 +59,7 @@ var GameComponent = (function () {
     };
     GameComponent.prototype.randomList = function () {
         var list = [];
-        for (var i = 0; i <= this.maxPokemon; i++) {
+        for (var i = 1; i <= this.maxPokemon; i++) {
             list.push(i);
         }
         list = this.shuffle(list);
@@ -87,7 +87,7 @@ var GameComponent = (function () {
     GameComponent = __decorate([
         core_1.Component({
             selector: 'game',
-            template: "\n  <div>\n  {{nGood}} / {{nPassed}}\n       <div *ngIf=\"last\">\n            <div *ngIf=\"last.isFound\">Yeah!</div>\n            <div *ngIf=\"!last.isFound\">Nop :(</div>\n           <div class=\"pogo pokemon-{{last.id}} pogo\"></div>\n           {{last.name}}\n       </div>\n  </div>\n  <div class=\"find-it\">\n      <find-it *ngIf=\"id\" [id]=\"id\" (onGood)=\"onGood()\"></find-it>\n      <br>\n      <button class=\"btn-primary btn\" (click)=\"skip()\">Passer au suivant</button>\n   </div>\n   <div>\n        <div *ngFor=\"let id of list_nexts\">\n            <div class=\"pogo pokemon-{{id}} pogo\"></div>\n        </div>\n   </div>\n  ",
+            template: "\n  <div>\n  {{nGood}} / {{nPassed}}\n       <div *ngIf=\"last\">\n            <div *ngIf=\"last.isFound\">Yeah!</div>\n            <div *ngIf=\"!last.isFound\">Nop :(</div>\n           <div class=\"pogo pokemon-{{last.id}} pogo\"></div>\n           {{last.name}}\n       </div>\n  </div>\n  <div class=\"find-it\">\n      <find-it *ngIf=\"current_id\" [id]=\"current_id\" (onGood)=\"onGood()\"></find-it>\n      <br>\n      <button class=\"btn-primary btn\" (click)=\"skip()\">Passer au suivant</button>\n   </div>\n   <div>\n        <div *ngFor=\"let id of list_nexts\">\n            <div class=\"pogo pokemon-{{id}} pogo\"></div>\n        </div>\n   </div>\n  ",
             providers: [],
             directives: [find_it_component_1.FindItComponent]
         }), 

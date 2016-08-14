@@ -15,7 +15,7 @@ import { FindItComponent } from './find-it.component';
        </div>
   </div>
   <div class="find-it">
-      <find-it *ngIf="id" [id]="id" (onGood)="onGood()"></find-it>
+      <find-it *ngIf="current_id" [id]="current_id" (onGood)="onGood()"></find-it>
       <br>
       <button class="btn-primary btn" (click)="skip()">Passer au suivant</button>
    </div>
@@ -30,7 +30,7 @@ import { FindItComponent } from './find-it.component';
 })
 
 export class GameComponent {
-    id: number = 1;
+    current_id: number = 1;
     last = null;
     nGood = 0;
     nPassed = -1;
@@ -49,9 +49,9 @@ export class GameComponent {
     onGood() {
         this.nGood++;
         this.last = {
-            id: this.id,
+            id: this.current_id,
             isFound: true,
-            name: this.dico.getName(this.id)
+            name: this.dico.getName(this.current_id)
         };
         this.next();
 
@@ -59,9 +59,9 @@ export class GameComponent {
 
     skip() {
         this.last = {
-            id: this.id,
+            id: this.current_id,
             isFound: false,
-            name: this.dico.getName(this.id)
+            name: this.dico.getName(this.current_id)
         };
         this.next();
     }
@@ -73,9 +73,9 @@ export class GameComponent {
             this.curentIRandom = 0;
         }
 
-        this.id = null;
+        this.current_id = null;
         let new_id = this.list_random[this.curentIRandom++];
-        setTimeout(() => this.id = new_id, 50);
+        setTimeout(() => this.current_id = new_id, 50);
 
         this.list_nexts = [];
         for (let i = 0; i < 10; i++) {
@@ -85,7 +85,7 @@ export class GameComponent {
 
     randomList() {
         let list = [];
-        for (let i=0; i <= this.maxPokemon; i++) {
+        for (let i=1; i <= this.maxPokemon; i++) {
             list.push(i);
         }
         list = this.shuffle(list);
