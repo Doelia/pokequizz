@@ -1,11 +1,19 @@
 import { Component, EventEmitter } from '@angular/core';
 import {PokemonDicoService } from './pokemon-dico.service';
 import { FindItComponent } from './find-it.component';
-import { DonesComponent } from './dones.component';
 
 @Component({
   selector: 'game',
   template: `
+  <div>
+  {{nGood}} / {{nPassed}}
+       <div *ngIf="last">
+            <div *ngIf="last.isFound">Yeah!</div>
+            <div *ngIf="!last.isFound">Nop :(</div>
+           <div class="pogo pokemon-{{last.id}} pogo"></div>
+           {{last.name}}
+       </div>
+  </div>
   <div class="find-it">
       <find-it *ngIf="id" [id]="id" (onGood)="onGood()"></find-it>
       <br>
@@ -16,28 +24,22 @@ import { DonesComponent } from './dones.component';
             <div class="pogo pokemon-{{id}} pogo"></div>
         </div>
    </div>
-   <div>
-       <h3>Pokémons trouvés</h3>
-       <dones class="success" [onGood]="addToDone"></dones>
-   </div>
-   <div>
-       <h3>Pokémons non trouvés</h3>
-       <dones class="failed" [onGood]="addToFailed"></dones>
-   </div>
   `,
   providers: [],
-  directives: [FindItComponent, DonesComponent]
+  directives: [FindItComponent]
 })
 
 export class GameComponent {
-    addToDone = new EventEmitter();
-    addToFailed = new EventEmitter();
     id: number = 1;
+    last = null;
+    nGood = 0;
+    nPassed = -1;
 
     curentIRandom = 0;
     list_random = [];
     list_nexts = [];
 
+    // Constantes
     maxPokemon = 151;
 
     constructor(private dico: PokemonDicoService) {
@@ -45,16 +47,27 @@ export class GameComponent {
     }
 
     onGood() {
-        this.addToDone.emit(this.id);
+        this.nGood++;
+        this.last = {
+            id: this.id,
+            isFound: true,
+            name: this.dico.getName(this.id)
+        };
         this.next();
+
     }
 
     skip() {
-        this.addToFailed.emit(this.id);
+        this.last = {
+            id: this.id,
+            isFound: false,
+            name: this.dico.getName(this.id)
+        };
         this.next();
     }
 
     next() {
+        this.nPassed++;
         if (this.curentIRandom >= this.list_random.length) {
             this.randomList();
             this.curentIRandom = 0;
@@ -68,6 +81,21 @@ export class GameComponent {
         for (let i = 0; i < 10; i++) {
             this.list_nexts.push(this.list_random[this.curentIRandom+i]);
         }
+    }
+
+    randomList() {
+        let list = [];
+        for (let i=0; i <= this.maxPokemon; i++) {
+            list.push(i);
+        }
+        list = this.shuffle(list);
+        this.list_random = list;
+        console.log('randomList', this.list_random);
+    }
+
+    random() {
+        let max = this.maxPokemon;
+        return Math.floor((Math.random() * max) + 1);
     }
 
     private shuffle(array) {
@@ -88,18 +116,5 @@ export class GameComponent {
       return array;
     }
 
-    randomList() {
-        let list = [];
-        for (let i=0; i <= this.maxPokemon; i++) {
-            list.push(i);
-        }
-        list = this.shuffle(list);
-        this.list_random = list;
-        console.log('randomList', this.list_random);
-    }
 
-    random() {
-        let max = this.maxPokemon;
-        return Math.floor((Math.random() * max) + 1);
-    }
 }
