@@ -1,23 +1,22 @@
-import { Component, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, OnInit , Output, Input } from '@angular/core';
 import {PokemonDicoService } from './pokemon-dico.service';
 import { FindItComponent } from './find-it.component';
+import { TimerComponent} from './timer'
 
 @Component({
   selector: 'game',
   template: `
+  <timer seconds="3" (endEvent)="onEndTimer()"></timer>
   <div>
-  {{nGood}} / {{nPassed}}
-       <div *ngIf="last">
-            <div *ngIf="last.isFound">Yeah!</div>
-            <div *ngIf="!last.isFound">Nop :(</div>
-           <div class="pogo pokemon-{{last.id}} pogo"></div>
-           {{last.name}}
-       </div>
+  {{nGood}} / {{nGood+nSkiped}}
   </div>
   <div class="find-it">
-      <find-it *ngIf="current_id" [id]="current_id" (onGood)="onGood()"></find-it>
+    <find-it (onGood)="onGood()" (onSkip)="onSkip()" [check]="checkEvent"></find-it>
+    <find-it (onGood)="onGood()" (onSkip)="onSkip()" [check]="checkEvent"></find-it>
+      <find-it (onGood)="onGood()" (onSkip)="onSkip()" [check]="checkEvent"></find-it>
+      <input class="form-control" id="user_input" type="text" name="user_input" [(ngModel)]="user_input" (ngModelChange)="check()" />
       <br>
-      <button class="btn-primary btn" (click)="skip()">Passer au suivant</button>
+
    </div>
    <div>
         <div *ngFor="let id of list_nexts">
@@ -26,94 +25,51 @@ import { FindItComponent } from './find-it.component';
    </div>
   `,
   providers: [],
-  directives: [FindItComponent]
+  directives: [FindItComponent, TimerComponent]
 })
 
-export class GameComponent {
-    current_id: number = 1;
-    last = null;
+export class GameComponent implements OnInit {
     nGood = 0;
-    nPassed = -1;
-
-    curentIRandom = 0;
-    list_random = [];
-    list_nexts = [];
+    nSkiped = 0;
+    user_input;
+    checkEvent: EventEmitter<any> = new EventEmitter();
 
     // Constantes
     maxPokemon = 151;
 
+    @Output() endGame: EventEmitter<any> = new EventEmitter();
+
     constructor(private dico: PokemonDicoService) {
-        this.next();
+
+    }
+
+    onEndTimer() {
+        console.log('THE END');
+        let score = {
+            nGood: this.nGood,
+            nSkiped: this.nSkiped
+        };
+        this.endGame.emit(score);
     }
 
     onGood() {
+        document.getElementById("user_input").focus();
+        document.getElementById("user_input").value = "";
         this.nGood++;
-        this.last = {
-            id: this.current_id,
-            isFound: true,
-            name: this.dico.getName(this.current_id)
-        };
-        this.next();
-
     }
 
-    skip() {
-        this.last = {
-            id: this.current_id,
-            isFound: false,
-            name: this.dico.getName(this.current_id)
-        };
-        this.next();
+    onSkip() {
+        document.getElementById("user_input").focus();
+        document.getElementById("user_input").value = "";
+        this.nSkiped++;
     }
 
-    next() {
-        this.nPassed++;
-        if (this.curentIRandom >= this.list_random.length) {
-            this.randomList();
-            this.curentIRandom = 0;
-        }
-
-        this.current_id = null;
-        let new_id = this.list_random[this.curentIRandom++];
-        setTimeout(() => this.current_id = new_id, 50);
-
-        this.list_nexts = [];
-        for (let i = 0; i < 10; i++) {
-            this.list_nexts.push(this.list_random[this.curentIRandom+i]);
-        }
+    check() {
+        this.checkEvent.emit(this.user_input);
     }
 
-    randomList() {
-        let list = [];
-        for (let i=1; i <= this.maxPokemon; i++) {
-            list.push(i);
-        }
-        list = this.shuffle(list);
-        this.list_random = list;
-        console.log('randomList', this.list_random);
-    }
-
-    random() {
-        let max = this.maxPokemon;
-        return Math.floor((Math.random() * max) + 1);
-    }
-
-    private shuffle(array) {
-      var currentIndex = array.length, temporaryValue, randomIndex;
-
-      // While there remain elements to shuffle...
-      while (0 !== currentIndex) {
-
-        // Pick a remaining element...
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        // And swap it with the current element.
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-      }
-
-      return array;
+    ngOnInit() {
+        document.getElementById("user_input").focus();
     }
 
 
