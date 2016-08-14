@@ -3,6 +3,8 @@ import {PokemonDicoService } from './pokemon-dico.service';
 import { FindItComponent } from './find-it.component';
 import { TimerComponent} from './timer'
 
+declare var $:any;
+
 @Component({
   selector: 'game',
   template: `
@@ -10,14 +12,21 @@ import { TimerComponent} from './timer'
   <div>
   {{nGood}} / {{nGood+nSkiped}}
   </div>
-  <div class="find-it">
-    <find-it (onGood)="onGood()" (onSkip)="onSkip()" [check]="checkEvent"></find-it>
-    <find-it (onGood)="onGood()" (onSkip)="onSkip()" [check]="checkEvent"></find-it>
-      <find-it (onGood)="onGood()" (onSkip)="onSkip()" [check]="checkEvent"></find-it>
-      <input class="form-control" id="user_input" type="text" name="user_input" [(ngModel)]="user_input" (ngModelChange)="check()" />
-      <br>
-
+  <div class="row" style="margin-bottom: 20px;">
+    <div class="col-xs-4">
+        <find-it (onGood)="onGood()" (onSkip)="onSkip()" [check]="checkEvent"></find-it>
+    </div>
+    <div class="col-xs-4">
+        <find-it (onGood)="onGood()" (onSkip)="onSkip()" [check]="checkEvent"></find-it>
+    </div>
+    <div class="col-xs-4">
+        <find-it (onGood)="onGood()" (onSkip)="onSkip()" [check]="checkEvent"></find-it>
+    </div>
    </div>
+
+   <input class="form-control" id="user_input" type="text" name="user_input" [(ngModel)]="user_input" (ngModelChange)="check()" />
+   <br>
+
    <div>
         <div *ngFor="let id of list_nexts">
             <div class="pogo pokemon-{{id}} pogo"></div>
@@ -54,13 +63,13 @@ export class GameComponent implements OnInit {
 
     onGood() {
         document.getElementById("user_input").focus();
-        document.getElementById("user_input").value = "";
+        $('#user_input').val('');
         this.nGood++;
     }
 
     onSkip() {
         document.getElementById("user_input").focus();
-        document.getElementById("user_input").value = "";
+        $('#user_input').val('');
         this.nSkiped++;
     }
 

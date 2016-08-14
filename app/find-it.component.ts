@@ -1,14 +1,27 @@
 import {Component, Input, Output, OnInit, EventEmitter} from '@angular/core';
-import { PokemonComponent} from './pokemon.component';
 import {PokemonDicoService } from './pokemon-dico.service';
 
 @Component({
     selector: 'find-it',
-    directives: [PokemonComponent],
+    directives: [],
     template: `
-    <pokemon [id]="current_id"></pokemon>
-    <button class="btn-primary btn" (click)="skip()">Passer (-1)</button>
-    `
+    <div class="find-it">
+        <div class="number">#{{current_id}}</div>
+        <div class="pogo pokemon-{{current_id}} pogo-m"></div>
+        <button class="btn-primary btn btn-block" (click)="skip()">Passer (-1)</button>
+    </div>
+    `,
+    styles: [`
+        .find-it {
+            border: 1px solid black;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .find-it .pogo {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    `]
 })
 export class FindItComponent implements OnInit {
 
@@ -24,7 +37,7 @@ export class FindItComponent implements OnInit {
     @Output() onSkip: EventEmitter<any> = new EventEmitter();
 
     constructor(private dico: PokemonDicoService) {
-        
+
     }
 
     ngOnInit() {
