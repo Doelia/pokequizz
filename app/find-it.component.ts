@@ -24,7 +24,7 @@ export class FindItComponent implements OnInit {
     @Output() onSkip: EventEmitter<any> = new EventEmitter();
 
     constructor(private dico: PokemonDicoService) {
-
+        
     }
 
     ngOnInit() {
@@ -57,7 +57,6 @@ export class FindItComponent implements OnInit {
         this.current_id = this.list_random[this.curentIRandom++];
     }
 
-
     randomList() {
         let list = [];
         for (let i=1; i <= this.maxPokemon; i++) {
@@ -75,36 +74,29 @@ export class FindItComponent implements OnInit {
 
     private shuffle(array) {
       var currentIndex = array.length, temporaryValue, randomIndex;
-
-      // While there remain elements to shuffle...
       while (0 !== currentIndex) {
-
-        // Pick a remaining element...
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
-        // And swap it with the current element.
         temporaryValue = array[currentIndex];
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
       }
-
       return array;
     }
 
 
     private cleanName(str) {
-        return  str.replace(/[áàãâä]/gi,"a")
-         .replace(/[éè¨ê]/gi,"e")
-         .replace(/[íìïî]/gi,"i")
-         .replace(/[óòöôõ]/gi,"o")
-         .replace(/[úùüû]/gi, "u")
-         .replace(/[ç]/gi, "c")
-         .replace(/[ñ]/gi, "n")
-         .replace(/[^a-zA-Z0-9]/g," ")
-         .toUpperCase();
+        return str
+            .replace(/[áàãâä]/gi,"a")
+            .replace(/[éè¨ê]/gi,"e")
+            .replace(/[íìïî]/gi,"i")
+            .replace(/[óòöôõ]/gi,"o")
+            .replace(/[úùüû]/gi, "u")
+            .replace(/[ç]/gi, "c")
+            .replace(/[ñ]/gi, "n")
+            .replace(/[^a-zA-Z0-9]/g," ")
+            .toUpperCase();
     }
-
-
 
 
 }

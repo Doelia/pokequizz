@@ -29,13 +29,13 @@ import { TimerComponent} from './timer'
 })
 
 export class GameComponent implements OnInit {
-    nGood = 0;
-    nSkiped = 0;
+
     user_input;
     checkEvent: EventEmitter<any> = new EventEmitter();
+    nGood = 0;
+    nSkiped = 0;
 
-    // Constantes
-    maxPokemon = 151;
+    @Input() maxPokemon = 151;
 
     @Output() endGame: EventEmitter<any> = new EventEmitter();
 
